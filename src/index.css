@@ -1,3 +1,4 @@
+
 @import url(
 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'
 );
@@ -23,4 +24,15 @@ a{
 
 button{
   font-family:inherit;
+}
+html,
+body,
+#root{
+  width:100%;
+  overflow-x:hidden;
+}
+
+section{
+  width:100%;
+  overflow:hidden;
 }

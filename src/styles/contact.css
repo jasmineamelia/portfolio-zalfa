@@ -106,6 +106,7 @@
 
 .input-group input,
 .input-group textarea{
+  width:100%;
   border:1px solid #ddd;
   border-radius:16px;
   padding:16px;
@@ -145,18 +146,86 @@
   transform:translateY(-3px);
 }
 
+/* TABLET */
+
 @media(max-width:992px){
+
+  .contact{
+    padding:80px 20px;
+  }
 
   .contact-wrapper{
     grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .contact-info{
+    text-align:center;
   }
 
   .contact-info h2{
-    font-size:48px;
+    font-size:40px;
+  }
+
+  .contact-info p{
+    max-width:100%;
+  }
+
+  .info-list{
+    align-items:center;
+  }
+
+  .social-buttons{
+    justify-content:center;
+  }
+
+  .contact-form-card{
+    padding:25px;
+    border-radius:20px;
   }
 
   .form-row{
     grid-template-columns:1fr;
   }
+}
 
+/* MOBILE */
+
+@media(max-width:576px){
+
+  .contact{
+    padding:60px 15px;
+  }
+
+  .contact-info h2{
+    font-size:30px;
+  }
+
+  .contact-info p{
+    font-size:14px;
+  }
+
+  .contact-form-card{
+    padding:20px;
+  }
+
+  .input-group input,
+  .input-group textarea{
+    padding:14px;
+    font-size:14px;
+  }
+
+  .send-btn{
+    padding:16px;
+    font-size:14px;
+  }
+
+  .social-buttons{
+    flex-direction:column;
+  }
+
+  .social-buttons a{
+    width:100%;
+    justify-content:center;
+  }
 }
