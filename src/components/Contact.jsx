@@ -1,23 +1,51 @@
+import { useState } from "react";
 import "../styles/contact.css";
 
 import {
   FaGithub,
   FaLinkedin,
   FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt
 } from "react-icons/fa";
 
 export default function Contact() {
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    setResult("Sending...");
+
+    const formData = new FormData(event.target);
+
+    formData.append(
+      "access_key",
+      "466acef7-c5d6-43ea-aee4-8147074b7890"
+    );
+
+    const response = await fetch(
+      "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Message sent successfully!");
+      event.target.reset();
+    } else {
+      setResult("Failed to send message.");
+      console.log(data);
+    }
+  };
+
   return (
-    <section
-      className="contact"
-      id="contact"
-    >
+    <section className="contact" id="contact">
       <div className="contact-wrapper">
 
         {/* LEFT */}
-
         <div className="contact-info">
 
           <span className="contact-tag">
@@ -25,7 +53,7 @@ export default function Contact() {
           </span>
 
           <h2>
-              Open for Opportunities and Collaboration
+            Open for Opportunities and Collaboration
           </h2>
 
           <p>
@@ -53,39 +81,39 @@ export default function Contact() {
 
           </div>
 
-         <div className="social-buttons">
+          <div className="social-buttons">
 
-  <a
-    href="https://github.com/jasmineamelia"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaGithub />
-    GitHub
-  </a>
+            <a
+              href="https://github.com/jasmineamelia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub />
+              GitHub
+            </a>
 
-  <a
-    href="https://www.linkedin.com/in/zalfa-amelia-2bb405401/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaLinkedin />
-    LinkedIn
-  </a>
+            <a
+              href="https://www.linkedin.com/in/zalfa-amelia-2bb405401/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin />
+              LinkedIn
+            </a>
 
-  <a href="mailto:zalfajasmineamelia@gmail.com">
-    <FaEnvelope />
-    Email
-  </a>
+            <a href="mailto:zalfajasmineamelia@gmail.com">
+              <FaEnvelope />
+              Email
+            </a>
 
-</div>
+          </div>
+
         </div>
 
         {/* RIGHT */}
-
         <div className="contact-form-card">
 
-          <form>
+          <form onSubmit={onSubmit}>
 
             <div className="form-row">
 
@@ -93,7 +121,9 @@ export default function Contact() {
                 <label>Name</label>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your name"
+                  required
                 />
               </div>
 
@@ -101,7 +131,9 @@ export default function Contact() {
                 <label>Email</label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="your@email.com"
+                  required
                 />
               </div>
 
@@ -109,19 +141,21 @@ export default function Contact() {
 
             <div className="input-group">
               <label>Subject</label>
-
               <input
                 type="text"
+                name="subject"
                 placeholder="What's this about?"
+                required
               />
             </div>
 
             <div className="input-group">
               <label>Message</label>
-
               <textarea
+                name="message"
                 rows="6"
                 placeholder="Tell me about your project..."
+                required
               />
             </div>
 
@@ -131,6 +165,15 @@ export default function Contact() {
             >
               Send Message
             </button>
+
+            <p
+              style={{
+                marginTop: "15px",
+                textAlign: "center",
+              }}
+            >
+              {result}
+            </p>
 
           </form>
 
